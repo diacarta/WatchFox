@@ -6,7 +6,7 @@ using Zeta.CommonBot;
 
 namespace Kbits.Demonbuddy.Plugins
 {
-    class LogMessageWriter : IEventEmitter
+    class EventsToLogSender : IDbEventHandler
     {
         public void Dispose()
         {

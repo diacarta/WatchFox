@@ -4,12 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows;
+using System.Windows.Forms;
 using System.Text;
 using Zeta;
 using Zeta.Common;
 using Zeta.Common.Plugins;
 using Zeta.Internals.Actors;
 using Zeta.CommonBot;
+using Zeta.Internals;
+using Zeta.Internals.Actors;
+using Zeta.Internals.Service;
+using System.Drawing.Imaging;
 
 namespace Kbits.Demonbuddy.Plugins
 {
@@ -17,7 +22,7 @@ namespace Kbits.Demonbuddy.Plugins
     {
         private string _name;
         private ActorClass _heroClass;
-        private IEventEmitter _emitter;
+        private IDbEventHandler _emitter;
 
         public void OnInitialize()
         {
@@ -28,7 +33,7 @@ namespace Kbits.Demonbuddy.Plugins
             Logging.Write("[WatchFox] " + Version + " initializing...");
             Logging.Write("[WatchFox] watching " + _name + ": lvl " + level + " " + _heroClass + " @ " + ZetaDia.Service.CurrentHero.CurrentDifficulty);
 
-            _emitter = new LogMessageWriter();
+            _emitter = new EventsToLogSender();
 
             BotMain.OnStart += Start;
             BotMain.OnStop += Stop;

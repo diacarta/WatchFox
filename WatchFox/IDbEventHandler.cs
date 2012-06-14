@@ -2,7 +2,7 @@
 
 namespace Kbits.Demonbuddy.Plugins
 {
-    public interface IEventEmitter
+    public interface IDbEventHandler
     {
         void Error(string errorMessage);
         void Dispose();

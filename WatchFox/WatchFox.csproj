@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="LogMessageWriter.cs" />
     <Compile Include="IDbEventHandler.cs" />
+    <Compile Include="SocketEventSender.cs" />
     <Compile Include="WatchFox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

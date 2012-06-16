@@ -33,7 +33,7 @@ namespace Kbits.Demonbuddy.Plugins
             Logging.Write("[WatchFox] " + Version + " initializing...");
             Logging.Write("[WatchFox] watching " + _name + ": lvl " + level + " " + _heroClass + " @ " + ZetaDia.Service.CurrentHero.CurrentDifficulty);
 
-            _emitter = new EventsToLogSender();
+            _emitter = new SocketEventSender();
 
             BotMain.OnStart += Start;
             BotMain.OnStop += Stop;

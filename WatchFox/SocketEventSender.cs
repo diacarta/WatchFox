@@ -7,23 +7,13 @@ using System.Net.Sockets;
 
 namespace Kbits.Demonbuddy.Plugins
 {
-    class SocketEventSender : IDbEventHandler
+    class SocketEventSender
     {
         TcpClient _tcpClient = new TcpClient();
         NetworkStream _serverStream = default(NetworkStream);
 
-        public SocketEventSender()
-        {
-            try
-            {
-                _tcpClient.Connect("127.0.0.1", 9050);
-                _serverStream = _tcpClient.GetStream();
-            }
-            catch (SocketException e)
-            {
-                Logging.Write("[Watchfox] error connecting to endpoint: " + e);
-            }
-        }
+        private string _serverIP = "127.0.0.1";
+        private int _serverPort = 9050;
 
         public void Error(string errorMessage)
         {
@@ -38,18 +28,34 @@ namespace Kbits.Demonbuddy.Plugins
         {
         }
 
-        public void Start(string message)
+        public void Enable()
         {
-            SendStringToSocket(message);
+            try
+            {
+                _tcpClient.Connect(_serverIP, _serverPort);
+                _serverStream = _tcpClient.GetStream();
+            }
+            catch (SocketException e)
+            {
+                Logging.Write(String.Format("[Watchfox] error connecting to {0}:{1}", _serverIP, _serverPort));
+            }
         }
 
-        public void Stop(string message)
+        public void Disable(string message)
         {
-            SendStringToSocket(message);
+            try
+            {
+                _tcpClient.Close();
+            }
+            catch (Exception e)
+            {
+                Logging.Write(String.Format("[Watchfox] error closing socket: ", e));
+            }
         }
 
         public void Looted(ItemLootedEventArgs itemLootedEventArgs)
         {
+            SendStringToSocket(String.Format("[Watchfox] looted: {0}, {1}", itemLootedEventArgs.Item.Name, itemLootedEventArgs.Item.ItemBaseType));
         }
 
         public void ShutDown()
@@ -61,6 +67,18 @@ namespace Kbits.Demonbuddy.Plugins
             byte[] outStream = Encoding.ASCII.GetBytes(message);
             _serverStream.Write(outStream, 0, outStream.Length);
             _serverStream.Flush();
+        }
+
+        public void GameJoined()
+        {
+            SendStringToSocket("{\"msg\": \"Watchfox game joined.\"}");
+        }
+
+        public void GameLeft(WatchFoxStats stats)
+        {
+            var json = "{\"msg\": \"infostats\", \"gph\": \"" + stats.GoldPerHour + "\", \"gold\": \"" + stats.TotalGold + "\"}";
+
+            SendStringToSocket(json);
         }
     }
 }

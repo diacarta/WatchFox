@@ -21,7 +21,7 @@ namespace Kbits.Demonbuddy.Plugins
 
             sb.Append("{");
 
-            sb.Append("\"type\": \"" + Item.ItemType + "\", ");
+            sb.Append("\"itemType\": \"" + Item.ItemType + "\", ");
             
             sb.Append("\"quality\": \"" + Item.ItemQualityLevel + "\", ");
 

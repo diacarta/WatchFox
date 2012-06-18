@@ -70,9 +70,24 @@ util.log('System waiting at http://localhost:' + port)
 function handleIncomingEvent (data) {
   if (data.event == 'left'){
     lastStats = data.stats
+    lastStats.timeStamp = getCurrentTimeStamp()
     io.sockets.emit('pulse', lastStats)
   }
   if (data.event == 'loot'){
     io.sockets.emit('loot', { msg: data.msg})
   }
+}
+
+function getCurrentTimeStamp () {
+  var currentTime = new Date()
+  var hours = currentTime.getHours()
+  var minutes = currentTime.getMinutes()
+  if (minutes < 10){
+    minutes = "0" + minutes
+  }
+  var seconds = currentTime.getSeconds()
+  if (seconds < 10){
+    seconds = "0" + seconds
+  }
+  return hours + ":" + minutes + ":" + seconds
 }

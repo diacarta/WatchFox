@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Demonbuddy">
-      <HintPath>..\..\..\Users\matthias\db\Demonbuddy.exe</HintPath>
+      <HintPath>..\lib\Demonbuddy.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,6 +48,7 @@
     <Compile Include="SocketEventSender.cs" />
     <Compile Include="WatchFox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WatchFoxLootedItem.cs" />
     <Compile Include="WatchFoxStats.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

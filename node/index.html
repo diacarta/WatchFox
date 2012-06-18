@@ -7,19 +7,19 @@
       socket.on('pulse', function (stats) {
         if (stats != null){
 
-          document.write('<p>' + stats.timeStamp + ' gph: ' +  stats.gph +  'gold: '  +  stats.coinage + '</p>')
+          document.writeln('<p>' + stats.timeStamp + ' gph: ' +  stats.gph +  'gold: '  +  stats.coinage + '</p>')
         }
         else{
-          document.write("<p>no stats yet...</p>")
+          document.writeln("<p>no stats yet...</p>")
         }
       })
 
       socket.on('loot', function (item) {
-        document.write('<p>' + item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '</p>')
+        document.writeln('<p>' + item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '</p>')
       })
     </script>
   </head>
   <body>
-    muh
+    <p>muh</p>
   </body>
 </html>

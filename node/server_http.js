@@ -74,7 +74,9 @@ function handleIncomingEvent (data) {
     io.sockets.emit('pulse', lastStats)
   }
   if (data.event == 'loot'){
-    io.sockets.emit('loot', { msg: data.msg})
+    var item = data.item
+    item.timeStamp = getCurrentTimeStamp()
+    io.sockets.emit('loot', item)
   }
 }
 

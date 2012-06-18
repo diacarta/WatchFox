@@ -31,7 +31,7 @@ namespace Kbits.Demonbuddy.Plugins
 
             sb.Append("\"level\": \"" + Item.Level + "\", ");
             
-            sb.Append("\"link\": \"" + Item.ItemLink + "\"");
+            sb.Append("\"color\": \"" + Item.ItemLink.Substring(5,6) + "\"");
 
 
 

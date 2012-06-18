@@ -1,11 +1,13 @@
 net = require('net')
+util = require('util')
 
+var port = 9050
 
 var s = net.Server(function (socket) {
 
 
   socket.on('connect', function (socket) {
-    console.log("demonbuddy connected...")
+    util.log("demonbuddy connected...")
   })
 
   socket.on('data', function (msg_sent) {
@@ -13,17 +15,18 @@ var s = net.Server(function (socket) {
     var data = JSON.parse(msg_sent)
 
     if (data.hasOwnProperty("msg")){
-      console.log(data.msg + " / gph: " + data.gph)
+      util.log(data.msg + " / gph: " + data.gph)
     } else{
-      console.log(msg_sent.toString("binary"))
+      util.log(msg_sent.toString("binary"))
     }
 
   })
 
   socket.on('end', function (socket) {
-    console.log('connection closed')
+    util.log('connection closed')
   })
 })
 
-s.listen(9050)
-console.log('System waiting at http://localhost:9050')
+s.listen(port)
+
+util.log('System waiting at http://localhost:' + port)

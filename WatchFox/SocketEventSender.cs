@@ -41,7 +41,7 @@ namespace Kbits.Demonbuddy.Plugins
             }
         }
 
-        public void Disable(string message)
+        public void Disable()
         {
             try
             {
@@ -49,13 +49,13 @@ namespace Kbits.Demonbuddy.Plugins
             }
             catch (Exception e)
             {
-                Logging.Write(String.Format("[Watchfox] error closing socket: ", e));
+                Logging.Write(String.Format("[Watchfox] error closing socket: {0}", e));
             }
         }
 
         public void Looted(ItemLootedEventArgs itemLootedEventArgs)
         {
-            SendStringToSocket(String.Format("[Watchfox] looted: {0}, {1}", itemLootedEventArgs.Item.Name, itemLootedEventArgs.Item.ItemBaseType));
+            SendStringToSocket("{\"event\": \"loot\", \"msg\": \"Watchfox looted " + itemLootedEventArgs.Item.Name + ", " + itemLootedEventArgs.Item.ItemBaseType + "\"}");
         }
 
         public void ShutDown()
@@ -71,12 +71,12 @@ namespace Kbits.Demonbuddy.Plugins
 
         public void GameJoined()
         {
-            SendStringToSocket("{\"msg\": \"Watchfox game joined.\"}");
+            SendStringToSocket("{\"event\": \"joined\", \"msg\": \"Watchfox game joined.\"}");
         }
 
         public void GameLeft(WatchFoxStats stats)
         {
-            var json = "{\"msg\": \"infostats\", \"gph\": \"" + stats.GoldPerHour + "\", \"gold\": \"" + stats.TotalGold + "\"}";
+            var json = "{\"event\": \"left\", \"stats\": "+ stats.AsJsonStyledString() +"}";
 
             SendStringToSocket(json);
         }

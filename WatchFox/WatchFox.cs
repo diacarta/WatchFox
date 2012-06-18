@@ -42,15 +42,6 @@ namespace Kbits.Demonbuddy.Plugins
 
         public void OnPulse()
         {
-            if (ZetaDia.IsInGame && ZetaDia.Me.IsValid)
-            {
-            }
-            else
-            {
-                _sender.Error("[WatchFox] there's something wrong: you're not logged in.");
-
-                Thread.Sleep(5000);
-            }
         }
 
         void Stop(IBot bot)
@@ -111,7 +102,7 @@ namespace Kbits.Demonbuddy.Plugins
                                 Level = ZetaDia.Service.CurrentHero.Level,
                                 Name = ZetaDia.Service.CurrentHero.Name,
                                 HeroClass = ZetaDia.Service.CurrentHero.Class.ToString(),
-                                TotalGold = ZetaDia.Me.Inventory.Coinage
+                                Coinage = ZetaDia.Me.Inventory.Coinage
                             };
 
             _sender.GameLeft(stats);
@@ -123,9 +114,10 @@ namespace Kbits.Demonbuddy.Plugins
             BotMain.OnStop -= Stop;
             GameEvents.OnLevelUp -= OnLevelUp;
             GameEvents.OnItemLooted -= OnItemLooted;
+            GameEvents.OnGameJoined -= OnGameJoined;
+            GameEvents.OnGameLeft -= OnGameLeft;
 
-            _sender.Disable("[WatchFox] Bot wurde gestoppt.");
-
+            _sender.Disable();
 
             Logging.Write("WatchFox " + Version + " disabled");
         }
@@ -137,7 +129,7 @@ namespace Kbits.Demonbuddy.Plugins
 
         public Version Version
         {
-            get { return new Version(0,2); }
+            get { return new Version(0,3); }
         }
 
         public string Name

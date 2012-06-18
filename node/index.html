@@ -10,20 +10,20 @@
     socket.on('pulse', function (stats) {
       if (stats != null){
 
-        document.write(stats.timeStamp + " gph: " +  stats.gph + " gold: " +  stats.coinage + "<br>");
+        document.writeln('<p>' + stats.timeStamp + ' gph: ' +  stats.gph +  gold:  +  stats.coinage + '</p>');
       }
       else{
-        document.write("no stats yet...<br>")
+        document.writeln("<p>no stats yet...</p>")
       }
     })
 
     socket.on('loot', function (item) {
       //<font color="#FF0000">Knallroter Text</font><br>
-      document.write(item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '<br>');
+      document.writeln('<p>' + item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '</p>');
     })
   </script>
   </head>
   <body>
-    muh
+    <p>muh</p>
   </body>
 </html>

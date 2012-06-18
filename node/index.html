@@ -1,26 +1,26 @@
 <html>
   <head>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io.connect('http://mschaffer.dyndns.org:33333');
+    <style type="text/css">
+      body { background-color:#000000; font-family:Arial; font-size:120%; color: #CCCCCC;}
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://mschaffer.dyndns.org:33333');
 
-    socket.on('pulse', function (stats) {
-      if (stats != null){
+      socket.on('pulse', function (stats) {
+        if (stats != null){
 
-        document.write('<p>' + stats.timeStamp + ' gph: ' +  stats.gph +  gold:  +  stats.coinage + '</p>');
-      }
-      else{
-        document.write("<p>no stats yet...</p>")
-      }
-    })
+          document.write('<p>' + stats.timeStamp + ' gph: ' +  stats.gph +  gold:  +  stats.coinage + '</p>')
+        }
+        else{
+          document.write("<p>no stats yet...</p>")
+        }
+      })
 
-    socket.on('loot', function (item) {
-      document.write('<p>' + item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '</p>');
-    })
-  </script>
-  <style type="text/css">
-    body { background-color:#000000; font-family:Arial; font-size:120%; color: #CCCCCC;}
-  </style>
+      socket.on('loot', function (item) {
+        document.write('<p>' + item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '</p>')
+      })
+    </script>
   </head>
   <body>
     muh

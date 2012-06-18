@@ -7,7 +7,7 @@
       socket.on('pulse', function (stats) {
         if (stats != null){
 
-          writeLog(stats.timeStamp + ' gph: ' +  stats.gph +  'gold: ' +  stats.coinage)
+          writeLog(stats.timeStamp + ' gph: ' +  stats.gph +  ', gold: ' +  stats.coinage)
         }
         else{
           writeLog("no stats yet...")

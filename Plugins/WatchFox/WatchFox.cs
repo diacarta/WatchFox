@@ -30,7 +30,9 @@ namespace Kbits.Demonbuddy.Plugins
 
         void OnItemLooted(object sender, ItemLootedEventArgs e)
         {
-            _sender.Looted(e);
+            var lootedItem = new LootedItem(e.Item);
+
+            _sender.Looted(lootedItem);
         }
 
         void OnLevelUp(object sender, EventArgs e)
@@ -94,8 +96,6 @@ namespace Kbits.Demonbuddy.Plugins
 
         void OnGameLeft(object sender, EventArgs e)
         {
-
-
             var stats = new WatchFoxStats
                             {
                                 GoldPerHour = GameStats.GoldPerHour,

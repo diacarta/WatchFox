@@ -4,6 +4,7 @@ using Zeta.Common;
 using Zeta.CommonBot;
 using System.Net;
 using System.Net.Sockets;
+using Zeta.Internals.Actors;
 
 namespace Kbits.Demonbuddy.Plugins
 {
@@ -53,9 +54,11 @@ namespace Kbits.Demonbuddy.Plugins
             }
         }
 
-        public void Looted(ItemLootedEventArgs itemLootedEventArgs)
+        public void Looted(LootedItem lootedItem)
         {
-            SendStringToSocket("{\"event\": \"loot\", \"msg\": \"Watchfox looted " + itemLootedEventArgs.Item.Name + ", " + itemLootedEventArgs.Item.ItemBaseType + "\"}");
+            var lootedItemJson = lootedItem.AsJsonStyledString();
+
+            SendStringToSocket("{\"event\": \"loot\", \"item\": " + lootedItemJson + "}");
         }
 
         public void ShutDown()

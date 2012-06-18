@@ -7,22 +7,29 @@
       socket.on('pulse', function (stats) {
         if (stats != null){
 
-          document.writeln('<p>' + stats.timeStamp + ' gph: ' +  stats.gph +  'gold: ' +  stats.coinage + '</p>')
+          writeLog(stats.timeStamp + ' gph: ' +  stats.gph +  'gold: ' +  stats.coinage)
         }
         else{
-          document.writeln("<p>no stats yet...</p>")
+          writeLog("no stats yet...")
         }
       })
 
       socket.on('loot', function (item) {
-        document.writeln('<p>' + item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '</p>')
+        writeLog(item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level)
       })
+
+      function writeLog(message){
+        var logDiv = document.getElementById('logDiv')
+          var newParagraph = document.createElement('p')
+          newParagraph.innerHTML = message
+          logDiv.insertBefore(newParagraph, logDiv.firstChild)
+      }
     </script>
     <style type="text/css">
       body { background-color:#000000; font-family:Arial; font-size:120%; color: #CCCCCC;}
     </style>
   </head>
   <body>
-    <p>muh</p>
+    <div id="logDiv">muh</div>
   </body>
 </html>

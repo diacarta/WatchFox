@@ -1,8 +1,5 @@
 <html>
   <head>
-  <style type="text/css">
-    body { background-color:#000000; font-family:Arial; font-size:120%; color: #CCCCCC;}
-  </style>
   <script src="/socket.io/socket.io.js"></script>
   <script>
     var socket = io.connect('http://mschaffer.dyndns.org:33333');
@@ -22,6 +19,9 @@
       document.writeln('<p>' + item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '</p>');
     })
   </script>
+  <style type="text/css">
+    body { background-color:#000000; font-family:Arial; font-size:120%; color: #CCCCCC;}
+  </style>
   </head>
   <body>
     <p>muh</p>

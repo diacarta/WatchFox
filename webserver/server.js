@@ -5,10 +5,10 @@ var app = require('http').createServer(handler)
 net = require('net')
 util = require('util')
 
-var lastStats;
-
+var lastStats
+var httpPort = 33333
 io.set('log level', 1)
-app.listen(33333);
+app.listen(33333)
 
 
 
@@ -16,11 +16,11 @@ function handler (req, res) {
   fs.readFile(__dirname + '/index.html',
   function (err, data) {
     if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
+      res.writeHead(500)
+      return res.end('Error loading index.html')
     }
 
-    res.writeHead(200);
+    res.writeHead(200)
     res.end(data);
   });
 }
@@ -31,7 +31,7 @@ io.sockets.on('connection', function (socket) {
 });
 
 
-var port = 9050
+var pluginPort = 9050
 
 var s = net.Server(function (socket) {
 
@@ -63,9 +63,10 @@ var s = net.Server(function (socket) {
   })
 })
 
-s.listen(port)
+s.listen(pluginPort)
 
-util.log('System waiting at http://localhost:' + port)
+util.log('waiting for events from db-plugin @ http://localhost:' + pluginPort)
+util.log('website ready at http://localhost:' + httpPort)
 
 function handleIncomingEvent (data) {
   if (data.event == 'left'){

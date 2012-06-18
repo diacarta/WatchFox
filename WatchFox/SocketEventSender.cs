@@ -21,10 +21,6 @@ namespace Kbits.Demonbuddy.Plugins
             SendStringToSocket(errorMessage);
         }
 
-        public void Dispose()
-        {
-        }
-
         public void LevelUp(string name, int level)
         {
         }
@@ -63,6 +59,14 @@ namespace Kbits.Demonbuddy.Plugins
 
         public void ShutDown()
         {
+            try
+            {
+                _tcpClient.Close();
+            }
+            catch (Exception e)
+            {
+                Logging.Write(String.Format("[Watchfox] error closing socket: {0}", e));
+            }
         }
 
         void SendStringToSocket(string message)

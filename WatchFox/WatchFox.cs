@@ -56,10 +56,9 @@ namespace Kbits.Demonbuddy.Plugins
 
         public void OnShutdown()
         {
+            UnsubscribeEvents();
+
             _sender.ShutDown();
-
-
-            _sender.Dispose();
         }
 
         public bool Equals(IPlugin other)
@@ -77,13 +76,8 @@ namespace Kbits.Demonbuddy.Plugins
 
             _sender = new SocketEventSender();
 
-            BotMain.OnStart += Start;
-            BotMain.OnStop += Stop;
-            GameEvents.OnLevelUp += OnLevelUp;
-            GameEvents.OnItemLooted += OnItemLooted;
-            GameEvents.OnGameJoined += OnGameJoined;
-            GameEvents.OnGameLeft += OnGameLeft;
-            
+            SubscribeEvents();
+
             _sender.Enable();
             
             Logging.Write("WatchFox " + Version +" enabled");
@@ -110,16 +104,31 @@ namespace Kbits.Demonbuddy.Plugins
 
         public void OnDisabled()
         {
+            UnsubscribeEvents();
+
+            _sender.Disable();
+
+            Logging.Write("WatchFox " + Version + " disabled");
+        }
+
+        private void SubscribeEvents()
+        {
+            BotMain.OnStart += Start;
+            BotMain.OnStop += Stop;
+            GameEvents.OnLevelUp += OnLevelUp;
+            GameEvents.OnItemLooted += OnItemLooted;
+            GameEvents.OnGameJoined += OnGameJoined;
+            GameEvents.OnGameLeft += OnGameLeft;
+        }
+
+        private void UnsubscribeEvents()
+        {
             BotMain.OnStart -= Start;
             BotMain.OnStop -= Stop;
             GameEvents.OnLevelUp -= OnLevelUp;
             GameEvents.OnItemLooted -= OnItemLooted;
             GameEvents.OnGameJoined -= OnGameJoined;
             GameEvents.OnGameLeft -= OnGameLeft;
-
-            _sender.Disable();
-
-            Logging.Write("WatchFox " + Version + " disabled");
         }
 
         public string Author
@@ -129,7 +138,7 @@ namespace Kbits.Demonbuddy.Plugins
 
         public Version Version
         {
-            get { return new Version(0,3); }
+            get { return new Version(1,0,0); }
         }
 
         public string Name

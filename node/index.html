@@ -10,13 +10,13 @@
         document.write(stats.timeStamp + " gph: " +  stats.gph + " gold: " +  stats.coinage + "<br>");
       }
       else{
-        document.write("no stats yet...")
+        document.write("no stats yet...<br>")
       }
     })
 
     socket.on('loot', function (item) {
 
-      document.write(item.timeStamp + " looted: " +  item.name + "<br>");
+      document.write(item.timeStamp + " looted: " +  item.name + ", " + item.link + "<br>");
     })
   </script>
   </head>

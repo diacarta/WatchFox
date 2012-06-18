@@ -5,20 +5,20 @@
     </style>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io.connect('http://mschaffer.dyndns.org:33333');
+      var socket = io.connect('http://mschaffer.dyndns.org:33333')
 
       socket.on('pulse', function (stats) {
         if (stats != null){
 
-          document.write('<p>' + stats.timeStamp + ' gph: ' +  stats.gph +  gold:  +  stats.coinage + '</p>')
+          document.write(stats.timeStamp + ' gph: ' +  stats.gph +  gold:  +  stats.coinage + '<br>')
         }
         else{
-          document.write("<p>no stats yet...</p>")
+          document.write('no stats yet...<br>')
         }
       })
 
       socket.on('loot', function (item) {
-        document.write('<p>' + item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '</p>')
+        document.write(item.timeStamp + ' looted: <b><font color="#' + item.color + '">' +  item.name + '</font></b>, ' + item.itemType + ', itemLevel: ' + item.level + '<br>')
       })
     </script>
   </head>
